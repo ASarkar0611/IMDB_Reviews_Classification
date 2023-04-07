@@ -24,6 +24,7 @@ def RunModel(train_df, test_df):
 if __name__ == '__main__':
     warnings.simplefilter("ignore")
     df = load_data('data/IMDB_Reviews.csv')
+    df = df.sample(1000)
     df_fold, numFolds = create_kfolds(df)
     #train_df, test_df = trainTestplit(df_fold, numFolds)
 
