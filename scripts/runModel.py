@@ -7,7 +7,7 @@ from scripts import predict
 
 MODELS = dispatcher.MODELS
 
-def run_Model(train_df, test_df):
+def run_Model(train_df, test_df, modelNum):
     #df_vec = CountVectorizer(tokenizer=word_tokenize, token_pattern=None)
     df_vec = TfidfVectorizer(tokenizer=word_tokenize, token_pattern=None)
 
@@ -17,5 +17,7 @@ def run_Model(train_df, test_df):
     xtest = df_vec.transform(test_df['review'])
 
     for key, value in MODELS.items():
-        acc = predict.predictVal(value,xtrain,xtest,train_df,test_df)
-        print(f"Accuracy of model {key} is {acc}.")
+
+        if key == modelNum:
+            print(f"Model {value[0]}:")
+            predict.predictVal(value[1],xtrain,xtest,train_df,test_df)
